@@ -1,0 +1,73 @@
+{
+  "logs": [
+    {
+      "id": 2,
+      "message": "Fixed hard drive on workstation 0098",
+      "attention": false,
+      "tech": "John Doe",
+      "date": "2020-11-20T06:01:10.722Z"
+    },
+    {
+      "id": 3,
+      "message": "Fixed wireless network shutdown",
+      "attention": false,
+      "tech": "Shittu Akeem",
+      "date": "2020-11-20T06:05:11.765Z"
+    },
+    {
+      "message": "may Allah help",
+      "attention": true,
+      "tech": "Shittu ",
+      "date": "2020-11-20T03:10:17.443Z",
+      "id": 7
+    },
+    {
+      "message": "It's a process",
+      "attention": "",
+      "tech": "Shittu ",
+      "date": "2020-11-20T03:11:04.816Z",
+      "id": 9
+    },
+    {
+      "id": 10,
+      "message": "Just do it right",
+      "attention": "",
+      "tech": "Shittu Akeem",
+      "date": "2020-11-20T06:04:29.507Z"
+    },
+    {
+      "message": "Find yourself a girl",
+      "attention": false,
+      "tech": "Shittu ",
+      "date": "2020-11-20T05:41:03.226Z",
+      "id": 11
+    }
+  ],
+  "techs": [
+    {
+      "id": 2,
+      "firstName": "Sam",
+      "lastName": "Smith"
+    },
+    {
+      "firstName": "Akeem",
+      "lastName": "Shittu",
+      "id": 5
+    },
+    {
+      "firstName": "Allen",
+      "lastName": "Adekunle",
+      "id": 6
+    },
+    {
+      "firstName": "Kareem",
+      "lastName": "tolani",
+      "id": 7
+    },
+    {
+      "firstName": "Akeem",
+      "lastName": "Trump",
+      "id": 8
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+.forminput {
+  background: none;
+  background-color: white;
+  color: grey;
+  font-size: 14px;
+  padding: 5px 10px 10px 5px;
+  display: block;
+  width: 100%;
+  height: 48px;
+  border: 1px solid #bdbdbd;
+  box-sizing: border-box;
+  border-radius: 8px;
+  margin: 25px 0;
+  margin-top: 10px;
+  text-indent: 12px;
+  font-family: var(--general-font);
+}
+
+.forminput:focus {
+  outline: none;
+  color: black;
+}
+
+input[type="password"] {
+  letter-spacing: 0.2em;
+  color: #000;
+  font-size: 32px;
+}
+input[type="password"]::placeholder {
+  letter-spacing: 0.2em;
+  color: #000;
+  font-size: 24px;
+}
+label {
+  margin: 0px;
+  padding: 0px;
+}
+
+input[type="submit"]:hover {
+  background-color: #f6f8f6;
+}
+
+input:focus::placeholder,
+textarea::placeholder {
+  opacity: 0.2;
+  font-size: 12px;
+}
+input::placeholder,
+textarea::placeholder {
+  opacity: 0.4;
+  font-size: 12px;
+}
+
+label.required:after {
+  color: red;
+  content: " *";
+  font-size: 24px;
+}

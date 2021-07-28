@@ -1,0 +1,18 @@
+.sidebar_container {
+  margin: 30px;
+  margin-left: 0;
+  background-color: #ffffff;
+  width: 250px;
+  padding: 30px;
+  height: 100vh;
+}
+.sidebar_container p {
+  font-weight: 600;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.checkbar input {
+  margin-right: 10px;
+  font-size: 48px;
+}

@@ -1,0 +1,28 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 0px;
+  align-items: center;
+}
+
+.logo {
+  font-size: 20px;
+  border-radius: 20px;
+  color: #ddd;
+  font-weight: 600;
+  padding: 8px 14px;
+  background-color: #888888;
+  background-image: linear-gradient(
+    to right,
+    #e2e2e2 0%,
+    #e2e2e2 50%,
+    #4b70d6 50%,
+    #4b70d6 100%
+  );
+  /* background-image: linear-gradient(
+    to right,
+    rgb(226, 226, 226, 0),
+    rgb(75, 112, 214, 0)
+  );
+   */
+}

@@ -1,0 +1,17 @@
+.select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  font-style: 14px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: var(--text-body-color);
+  box-sizing: border-box;
+}
+/* option {
+  color: #222;
+} */
+/* select:valid {
+  color: #222;
+} */

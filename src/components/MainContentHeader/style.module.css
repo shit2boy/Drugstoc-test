@@ -1,0 +1,25 @@
+.main_content_header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 20px;
+}
+.header_items {
+  display: flex;
+  /* padding-bottom: 6px; */
+  justify-content: space-around;
+  width: 500px;
+  font: normal normal bold 20px/34px Roboto;
+  letter-spacing: 0px;
+  color: #9a9a9a;
+  opacity: 1;
+}
+.header_items.active {
+  border-bottom: 2px #4b70d6 solid;
+  display: flex;
+  /* padding-bottom: 6px; */
+  font: normal normal bold 20px/34px Roboto;
+  letter-spacing: 0px;
+  color: #3e3e3e;
+  opacity: 1;
+}
