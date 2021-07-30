@@ -4,6 +4,7 @@
   align-items: center;
   width: 100%;
   margin-top: 5px;
+  margin-bottom: 10px;
   padding: 20px 0;
   background-color: #fff;
   position: relative;
@@ -27,16 +28,45 @@
   background-color: var(--label-custom);
 }
 .task_description .marketing {
-  background-color: var(--label-custom);
+  background-color: var(--label-danger);
+  font: italic normal 900 14px/17px Roboto;
+  letter-spacing: 0px;
+  color: #e24b4b;
+  opacity: 1;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 14px;
 }
 .task_description .integration {
-  background-color: var(--label-custom);
+  background-color: var(--label-primary) !important;
+  color: #00a7ff;
+  font: italic normal 900 14px/17px Roboto;
+  letter-spacing: 0px;
+  color: #707070;
+  opacity: 1;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 14px;
 }
 .task_description .custom {
   background-color: var(--label-custom);
+  font: italic normal 900 14px/17px Roboto;
+  letter-spacing: 0px;
+  color: #707070;
+  opacity: 1;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 14px;
 }
 .task_description .optimization {
-  background-color: var(--label-custom);
+  background-color: var(--label-custom) !important;
+  font: italic normal 900 14px/17px Roboto;
+  letter-spacing: 0px;
+  color: #a6e009;
+  opacity: 1;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 14px;
 }
 
 .task_card div h5 {
@@ -55,13 +85,16 @@
 .label_dot {
   font-size: 25px;
   margin-right: 12px;
-  color: #cbcbcb;
+  color: #a6e009;
 }
 .label_dot .review {
+  color: #a6e009;
+}
+.label_dot .verify {
   color: #ffa700;
 }
 .label_dot .progress {
-  color: #ffa700;
+  color: #00a7ff;
 }
 
 .asignee_user {
@@ -79,7 +112,7 @@
 
 .icons {
   font-size: 24px;
-  color: #929292;
+  color: #cbcbcb;
   position: relative;
 }
 
@@ -107,9 +140,13 @@
   padding: 5px;
   cursor: pointer;
 }
-/* @media screen and (max-width: 768px) {
-  .toolTips {
+@media screen and (max-width: 768px) {
+  /* .toolTips {
     width: auto;
     background-color: #ffffff;
+  } */
+
+  .task_card {
+    width: max-content;
   }
-} */
+}

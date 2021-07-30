@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./style.module.css";
 const ConfirmationDialogue = ({ children, popUpMessage }) => {
-  const [confirm, setConfirm] = useState(false);
+  const [confirm, setConfirm] = useState(true);
   const handlePopUp = () => {
     setConfirm(!confirm);
   };

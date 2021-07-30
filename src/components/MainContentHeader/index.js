@@ -1,5 +1,6 @@
+import ReactPaginate from "react-paginate";
 import styles from "./style.module.css";
-const ContentHeader = () => {
+const ContentHeader = (props) => {
   return (
     <div className={styles.main_content_header}>
       <div className={styles.header_items}>
@@ -9,7 +10,16 @@ const ContentHeader = () => {
         <span>Closed (0)</span>
       </div>
       <div className={styles.pagination_button}>
-        <span>Next</span> | <span>Prev</span>
+        <ReactPaginate
+          pageCount={props.pageCount}
+          marginPagesDisplayed={props.marginPagesDisplayed}
+          pageRangeDisplayed={props.pageRangeDisplayed}
+          onPageChange={props.onPageChange}
+          containerClassName={props.containerClassName}
+          subContainerClassName={props.subContainerClassName}
+          activeClassName={props.activeClassName}
+        />
+        {/* <span>Next</span> | <span>Prev</span> */}
       </div>
     </div>
   );

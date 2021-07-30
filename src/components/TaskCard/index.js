@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { connect } from "react-redux";
+import { setCurrent } from "../actions";
 import AddTaskForm from "../AddTaskForm";
 import TaskStatusLabel from "../customButton/CustomButton";
 import ConfirmationDialogue from "../PopConfirmation";
 import styles from "./style.module.css";
-const TaskCard = () => {
+const TaskCard = ({ tasksItem, deleteTask, setCurrent }) => {
   const [ismodal, setisOpen] = useState(false);
   const [showPopUp, setShowPopUp] = useState(false);
   const handleopenModal = () => {
@@ -14,10 +16,21 @@ const TaskCard = () => {
   };
   const handlePopUp = () => {
     setShowPopUp(!showPopUp);
+    // deleteTask(tasksItem);
 
-    console.log(showPopUp);
+    // console.log(showPopUp);
     // showPopUp
   };
+
+  // const deleteTask =(task)=> {
+  //   ref
+  //     .doc(task.id)
+  //     .delete()
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // }
+
   return (
     <div className={styles.task_card}>
       <div className={styles.icons}>
@@ -25,16 +38,35 @@ const TaskCard = () => {
         <i className="fa fa-list-alt"></i>
       </div>
       <div className={styles.task_description}>
-        <p className={styles.task}>
-          Increase confidence with TrustPilots reviews
+        <p className={styles.task}>{tasksItem.description}</p>
+        <p
+          className={`${
+            tasksItem["taskLabel"] === "optimization"
+              ? styles.optimization
+              : null
+          } ${tasksItem["taskLabel"] === "Custom task" ? styles.labelTag : null}
+           ${
+             tasksItem["taskLabel"] === "Testing"
+               ? styles.integration
+               : styles.labelTag
+           }
+           ${
+             tasksItem["taskLabel"] === "Integrations"
+               ? styles.integration
+               : styles.labelTag
+           }
+          
+          `}
+        >
+          {tasksItem.taskLabel}
         </p>
-        <p className={styles.labelTag}>Custom Task</p>
       </div>
       <div>
-        <h5>N500.00</h5>
+        <h5>N{tasksItem.taskPrice}</h5>
         <p className={styles.subtitle}>Task price</p>
         <h6 className={styles.subtitle}>
-          Delivery: <span className={styles.subtitle}></span> within 3 days
+          Delivery: <span className={styles.subtitle}></span> within{" "}
+          {tasksItem.delivryDate} days
         </h6>
       </div>
       <div className={styles.asignee_user}>
@@ -47,19 +79,33 @@ const TaskCard = () => {
           />
         </div>
         <div>
-          <h5>Adamu Musa</h5>
+          <h5>{tasksItem.expert}</h5>
           <p className={styles.subtitle}>Assigned to</p>
         </div>
       </div>
       <div>
         <TaskStatusLabel>
           {" "}
-          <span className={styles.label_dot}>&#8226;</span> Verify
+          <span
+            className={`${styles.label_dot} ${
+              tasksItem.taskStatus === " In Review" ? styles.verify : null
+            }`}
+          >
+            &#8226;
+          </span>{" "}
+          {tasksItem.taskStatus}
         </TaskStatusLabel>
       </div>
       <span className={styles.icons}>
         {/* <i className="fa fa-list-alt"></i> */}
-        <i class="fa fa-comment"></i>
+        <img
+          src="./icons/comment.png"
+          width="30px"
+          style={{ color: "#888" }}
+          height="30px"
+          alt="icon"
+        />
+        {/* <i className="fa fa-comment"></i> */}
       </span>
       <span className={styles.icons}> ...</span>
       <div className={styles.action_btns}>
@@ -71,11 +117,11 @@ const TaskCard = () => {
           closeModal={closeModal}
           handleopenModal={handleopenModal}
         >
-          <i className="fa fa-edit"></i>
+          <i className="fa fa-edit" onClick={() => setCurrent(tasksItem)}></i>
         </AddTaskForm>
       </div>
     </div>
   );
 };
 
-export default TaskCard;
+export default connect(null, { setCurrent })(TaskCard);

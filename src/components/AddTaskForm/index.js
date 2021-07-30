@@ -1,10 +1,102 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Modal from "../custom-modal/customModal";
 import FormInput from "../Form-input/form-input.component";
 import AddTaskBTN from "../customButton/CustomButton";
 import styles from "./style.module.css";
+import { connect } from "react-redux";
+import { addNewTask, editTask } from "../actions/index";
+import { v4 as uuidv4 } from "uuid";
 
-const AddTaskForm = ({ children, openModal, closeModal, handleopenModal }) => {
+const AddTaskForm = ({
+  children,
+  openModal,
+  closeModal,
+  handleopenModal,
+  staffs,
+  addNewTask,
+  current,
+  // addTask,
+}) => {
+  const [errors, setErrors] = useState({});
+
+  const [task, setTask] = useState({});
+
+  useEffect(() => {
+    if (current) {
+      setTask(current);
+    }
+  }, [current]);
+
+  const handleChange = (e) => {
+    setTask({
+      ...task,
+      id: uuidv4(),
+      delivryDate: "5",
+      [e.target.name]: e.target.value,
+    });
+    // console.log(task);
+  };
+
+  const validateForm = () => {
+    let errors = {};
+    let formIsValid = true;
+    if (!task.expert) {
+      formIsValid = false;
+      errors["expert"] = "*Please assign the task";
+    }
+    if (!task.taskPrice) {
+      formIsValid = false;
+      errors["taskPrice"] = "*Please input price";
+    }
+    if (!task.description) {
+      formIsValid = false;
+      errors["description"] = "*please provide detailed description";
+    }
+    if (task.description?.length <= 3) {
+      formIsValid = false;
+      errors["description"] = "*please provide detailed description";
+    }
+    if (typeof task.description !== "undefined") {
+      if (!task.expert.match(/^[a-zA-Z ]*$/)) {
+        formIsValid = false;
+        errors["description"] = "*Please enter alphabet characters only.";
+      }
+    }
+
+    if (!task.taskStatus) {
+      formIsValid = false;
+      errors["taskStatus"] = "please indicate task status";
+    }
+    if (!task.taskLabel) {
+      formIsValid = false;
+      errors["taskLabel"] = "please indicate task Label";
+    }
+    setErrors(errors);
+    return formIsValid;
+  };
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+
+    // console.log(task);
+    if (validateForm()) {
+      // setLoading(!loading);
+      setTask({
+        description: "",
+        taskLabel: "",
+        taskPrice: "",
+        taskStatus: "",
+        comments: "",
+        expert: " ",
+      });
+      if (current) {
+        editTask(task);
+      } else {
+        addNewTask(task);
+      }
+    }
+  };
+
   return (
     <Fragment>
       <div onClick={handleopenModal} style={{ cursor: "pointer" }}>
@@ -12,56 +104,141 @@ const AddTaskForm = ({ children, openModal, closeModal, handleopenModal }) => {
       </div>
       <Modal Open={openModal} onClose={closeModal}>
         <form
+          onSubmit={onSubmit}
           className={styles.addtask_form}
           // style={{ border: "1px solid red" }}
         >
           <FormInput
             type="text"
             label="Task title"
+            error={errors["description"]}
+            value={task["description"]}
+            onChange={handleChange}
+            name="description"
             placeholder="Task description"
+            required
           />
           <div>
-            <select className={styles.select}>
-              <option>Marketing & sale</option>
-              <option>Marketing & sale</option>
-              <option>Marketing & sale</option>
+            <label>Task Label</label>
+            <span
+              style={{ color: "#dd2b0e", fontSize: "0.8rem", display: "block" }}
+            >
+              {errors["taskLabel"]}
+            </span>
+            <select
+              className={styles.select}
+              name="taskLabel"
+              value={task["taskLabel"]}
+              onChange={handleChange}
+            >
+              <option> Label task to Department</option>
+              <option value="Custom task">Custom task</option>
+              <option value="Marketing & sale ">Marketing & sale</option>
+              <option value="Integrations ">Integrations</option>
+              <option value="Optimazation ">Optimazation</option>
+              <option value="Deployment ">Deployment</option>
+              <option value="Testing">Testing</option>
             </select>
           </div>
-          <FormInput type="text" label="Price" placeholder="Task price" />
+
           <FormInput
             type="text"
-            label="Assign task to"
-            placeholder="Assign task to"
+            label="Price"
+            error={errors["taskPrice"]}
+            value={task["taskPrice"]}
+            onChange={handleChange}
+            name="taskPrice"
+            placeholder="Task price"
+            required
           />
+          <div>
+            <label>Assign Task</label>
+            <span
+              style={{ color: "#dd2b0e", fontSize: "0.8rem", display: "block" }}
+            >
+              {errors["expert"]}
+            </span>
+            <select
+              className={styles.select}
+              name="expert"
+              value={task["expert"]}
+              onChange={handleChange}
+            >
+              <option>Choose assignee ..</option>
+              {staffs?.map((staff) => (
+                <option value={staff.fullname} key={staff.id}>
+                  {staff.fullName}
+                </option>
+              ))}
+            </select>
+          </div>
           <div style={{ padding: "10px 0" }}>
             <p>Task Status:</p>
+            <span
+              style={{ color: "#dd2b0e", fontSize: "0.8rem", display: "block" }}
+            >
+              {errors["taskStatus"]}
+            </span>
             <label>
               In Progress
-              <input type="radio" className={styles.checkbox} />
+              <input
+                type="radio"
+                name="taskStatus"
+                value="in progress"
+                onChange={handleChange}
+                className={styles.checkbox}
+              />
             </label>
             <label>
               In Review
-              <input type="radio" className={styles.checkbox} />
+              <input
+                type="radio"
+                name="taskStatus"
+                value="in review"
+                onChange={handleChange}
+                className={styles.checkbox}
+              />
             </label>
             <label>
               Verify
-              <input type="radio" className={styles.checkbox} />
+              <input
+                type="radio"
+                name="taskStatus"
+                value="verify"
+                onChange={handleChange}
+                className={styles.checkbox}
+              />
             </label>
             <label>
               Waiting Approval
-              <input type="radio" className={styles.checkbox} />
+              <input
+                type="radio"
+                name="taskStatus"
+                value="waiting approval"
+                onChange={handleChange}
+                className={styles.checkbox}
+              />
             </label>
           </div>
           <FormInput
             type="text"
-            label="comment"
+            value={task["comments"]}
+            label="Comment"
+            onChange={handleChange}
+            name="comments"
             placeholder="leave some comments"
           />
-          <AddTaskBTN type="button">Add Task to List</AddTaskBTN>
+          <AddTaskBTN type="submit" colored>
+            Add Task to List
+          </AddTaskBTN>
         </form>
       </Modal>
     </Fragment>
   );
 };
+const mapStateToProps = (state) => ({
+  staffs: state.experts,
+  current: state.current,
+});
 
-export default AddTaskForm;
+export default connect(mapStateToProps, { addNewTask, editTask })(AddTaskForm);

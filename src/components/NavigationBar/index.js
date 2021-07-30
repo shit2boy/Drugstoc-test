@@ -2,7 +2,7 @@ import { useState } from "react";
 import AddTaskForm from "../AddTaskForm";
 import ActionButton from "../customButton/CustomButton";
 import styles from "./style.module.css";
-const NavigationBar = () => {
+const NavigationBar = ({ addNewTask }) => {
   const [ismodal, setisOpen] = useState(false);
   const handleopenModal = () => {
     setisOpen(true);
@@ -19,6 +19,7 @@ const NavigationBar = () => {
         openModal={ismodal}
         closeModal={closeModal}
         handleopenModal={handleopenModal}
+        addNewTask={addNewTask}
       >
         <ActionButton colored>Add a new task &#43;</ActionButton>
       </AddTaskForm>
