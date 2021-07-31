@@ -8,27 +8,34 @@ import {
   SET_CURRENT,
   TASK_ERROR,
   DELETE_TASK,
+  NEXT_PAGE,
 } from "./types";
 
 import firebaseConfig from "../../config/fbconfig";
 
 const ref = firebaseConfig.firestore().collection("projects");
+// const ref = firebaseConfig.firestore().collection("taskProjects");
+export const getProjects = (sort) => async (dispatch) => {
+  const sortPattern = sort || "asc";
 
-export const getProjects = () => async (dispatch) => {
-  try {
-    setLoading();
-    ref.get().then((item) => {
+  ref
+    // .where('owner', '==', currentUserId)
+    // .where('title', '==', 'School1') // does not need index
+    // .where("taskPrice", "<=", 500) // needs index
+    .orderBy("createdDate", sortPattern)
+    // .orderBy("description", "asc")
+    .limit(6)
+    .onSnapshot((querySnapshot) => {
+      const tasks = [];
+      querySnapshot.forEach((doc) => {
+        tasks.push(doc.data());
+      });
       dispatch({
         type: GET_ALL_TASKS,
-        payload: item.docs.map((doc) => doc.data()),
+        payload: tasks,
       });
+      // console.log(tasks);
     });
-  } catch (err) {
-    dispatch({
-      type: TASK_ERROR,
-      payload: err,
-    });
-  }
 };
 
 export const setLoading = () => {
@@ -44,13 +51,14 @@ export const addNewTask = (task) => async (dispatch) => {
     setLoading();
     // const addNewTask = (task) => {
     ref
-      .doc()
+      .doc(task.id)
       .set(task)
+      .then(() => getProjects())
       .catch((err) => {
         console.error(err);
       });
     // };
-
+    // getProjects();
     dispatch({ type: ADD_TASK, payload: "Task Added" });
   } catch (err) {
     dispatch({
@@ -85,7 +93,7 @@ export const deleteTask = (id) => async (dispatch) => {
     });
   }
 };
-export const editTask = (task) => async (dispatch) => {
+export const updateTask = (task, callBack) => async (dispatch) => {
   try {
     setLoading();
     // console.log("were");
@@ -93,6 +101,7 @@ export const editTask = (task) => async (dispatch) => {
     ref
       .doc(task.id)
       .update(task)
+      .then(callBack("Task Updated"))
       .catch((err) => {
         console.error(err);
       });
@@ -107,6 +116,23 @@ export const editTask = (task) => async (dispatch) => {
       payload: err,
     });
   }
+};
+
+export const paginationQuery = () => async (dispatch) => {
+  let first = ref.orderBy("description").limit(5);
+  console.log("hjhhhhj");
+  return first.get().then((documentSnapshots) => {
+    let lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
+
+    let next = ref
+      .orderBy("description", "asc")
+      .startAfter(lastVisible)
+      .limit(5);
+    dispatch({
+      type: NEXT_PAGE,
+      payload: next,
+    });
+  });
 };
 
 export const setCurrent = (task) => {

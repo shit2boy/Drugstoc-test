@@ -1,35 +1,23 @@
 import { useState } from "react";
 import { connect } from "react-redux";
-import { setCurrent } from "../actions";
+import { setCurrent, deleteTask } from "../actions";
 import AddTaskForm from "../AddTaskForm";
 import TaskStatusLabel from "../customButton/CustomButton";
 import ConfirmationDialogue from "../PopConfirmation";
 import styles from "./style.module.css";
 const TaskCard = ({ tasksItem, deleteTask, setCurrent }) => {
   const [ismodal, setisOpen] = useState(false);
-  const [showPopUp, setShowPopUp] = useState(false);
+  // const [showPopUp, setShowPopUp] = useState(false);
   const handleopenModal = () => {
     setisOpen(true);
   };
   const closeModal = () => {
     setisOpen(false);
   };
-  const handlePopUp = () => {
-    setShowPopUp(!showPopUp);
-    // deleteTask(tasksItem);
+  // const handlePopUp = () => {
+  //   setShowPopUp(!showPopUp);
 
-    // console.log(showPopUp);
-    // showPopUp
-  };
-
-  // const deleteTask =(task)=> {
-  //   ref
-  //     .doc(task.id)
-  //     .delete()
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // }
+  // };
 
   return (
     <div className={styles.task_card}>
@@ -109,8 +97,11 @@ const TaskCard = ({ tasksItem, deleteTask, setCurrent }) => {
       </span>
       <span className={styles.icons}> ...</span>
       <div className={styles.action_btns}>
-        <ConfirmationDialogue>
-          <i className="fa fa-trash" onClick={handlePopUp}></i>
+        <ConfirmationDialogue deleteBtN={() => deleteTask(tasksItem.id)}>
+          <i
+            className="fa fa-trash"
+            // onClick={() => deleteTask(tasksItem.id)}
+          ></i>
         </ConfirmationDialogue>
         <AddTaskForm
           openModal={ismodal}
@@ -124,4 +115,4 @@ const TaskCard = ({ tasksItem, deleteTask, setCurrent }) => {
   );
 };
 
-export default connect(null, { setCurrent })(TaskCard);
+export default connect(null, { setCurrent, deleteTask })(TaskCard);

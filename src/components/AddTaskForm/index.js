@@ -4,7 +4,7 @@ import FormInput from "../Form-input/form-input.component";
 import AddTaskBTN from "../customButton/CustomButton";
 import styles from "./style.module.css";
 import { connect } from "react-redux";
-import { addNewTask, editTask } from "../actions/index";
+import { addNewTask, updateTask, clearCurrent } from "../actions/index";
 import { v4 as uuidv4 } from "uuid";
 
 const AddTaskForm = ({
@@ -15,23 +15,34 @@ const AddTaskForm = ({
   staffs,
   addNewTask,
   current,
-  // addTask,
+  updateTask,
+  clearCurrent,
 }) => {
   const [errors, setErrors] = useState({});
 
   const [task, setTask] = useState({});
-
+  const [editTask, setEditTask] = useState(false);
+  const [message, setMessage] = useState(null);
   useEffect(() => {
     if (current) {
       setTask(current);
+      setEditTask(true);
     }
   }, [current]);
 
   const handleChange = (e) => {
+    if (current === null) {
+      setTask({
+        ...task,
+        id: uuidv4(),
+        delivryDate: "5",
+        createdDate: new Date(),
+        [e.target.name]: e.target.value,
+      });
+      console.log(task);
+    }
     setTask({
       ...task,
-      id: uuidv4(),
-      delivryDate: "5",
       [e.target.name]: e.target.value,
     });
     // console.log(task);
@@ -89,8 +100,12 @@ const AddTaskForm = ({
         comments: "",
         expert: " ",
       });
-      if (current) {
-        editTask(task);
+      if (editTask) {
+        updateTask(task, setMessage);
+        clearCurrent();
+        setEditTask(false);
+        // console.log(current);
+        // console.log(task);
       } else {
         addNewTask(task);
       }
@@ -228,6 +243,17 @@ const AddTaskForm = ({
             name="comments"
             placeholder="leave some comments"
           />
+          <small
+            style={{
+              color: "green",
+              fontSize: "14px",
+              display: "grid",
+              justifyContent: "center",
+            }}
+          >
+            {" "}
+            {message}
+          </small>
           <AddTaskBTN type="submit" colored>
             Add Task to List
           </AddTaskBTN>
@@ -241,4 +267,8 @@ const mapStateToProps = (state) => ({
   current: state.current,
 });
 
-export default connect(mapStateToProps, { addNewTask, editTask })(AddTaskForm);
+export default connect(mapStateToProps, {
+  addNewTask,
+  clearCurrent,
+  updateTask,
+})(AddTaskForm);

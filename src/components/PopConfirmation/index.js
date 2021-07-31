@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./style.module.css";
-const ConfirmationDialogue = ({ children, popUpMessage }) => {
+const ConfirmationDialogue = ({ children, deleteBtN, popUpMessage }) => {
   const [confirm, setConfirm] = useState(true);
   const handlePopUp = () => {
     setConfirm(!confirm);
@@ -11,7 +11,7 @@ const ConfirmationDialogue = ({ children, popUpMessage }) => {
       <span className={`${!confirm ? styles.show : null} ${styles.popuptext}`}>
         {popUpMessage ? { popUpMessage } : "Are you sure to delete ?"}
         <div className={styles.button_container}>
-          <button>Yes</button>
+          <button onClick={deleteBtN}>Yes</button>
           <button onClick={handlePopUp}>No</button>
         </div>
       </span>

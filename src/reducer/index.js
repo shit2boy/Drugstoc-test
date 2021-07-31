@@ -8,6 +8,7 @@ import {
   SET_CURRENT,
   TASK_ERROR,
   DELETE_TASK,
+  NEXT_PAGE,
 } from "../components/actions/types";
 
 const initState = {
@@ -47,7 +48,7 @@ const initState = {
 export default (state = initState, action) => {
   switch (action.type) {
     case GET_ALL_TASKS:
-      // console.log(action.payload);
+      console.log(action.payload);
       return {
         ...state,
         tasks: action.payload,
@@ -80,6 +81,7 @@ export default (state = initState, action) => {
         loading: false,
       };
     case CLEAR_CURRENT:
+      // console.log("cleared");
       return {
         ...state,
         current: null,
@@ -88,6 +90,12 @@ export default (state = initState, action) => {
       return {
         ...state,
         current: action.payload,
+      };
+    case NEXT_PAGE:
+      console.log("werww");
+      return {
+        ...state,
+        tasks: action.payload,
       };
     case SEARCH_TASK:
       return {

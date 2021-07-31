@@ -1,4 +1,6 @@
 import ReactPaginate from "react-paginate";
+import { connect } from "react-redux";
+import { paginationQuery } from "../actions";
 import styles from "./style.module.css";
 const ContentHeader = (props) => {
   return (
@@ -19,10 +21,10 @@ const ContentHeader = (props) => {
           subContainerClassName={props.subContainerClassName}
           activeClassName={props.activeClassName}
         />
-        {/* <span>Next</span> | <span>Prev</span> */}
+        {/* <span onClick={() => paginationQuery}>Next</span> | <span>Prev</span> */}
       </div>
     </div>
   );
 };
 
-export default ContentHeader;
+export default connect(null, { paginationQuery })(ContentHeader);

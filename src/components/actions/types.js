@@ -6,6 +6,6 @@ export const UPDATE_TASK = "UPDATE_LOG";
 export const SET_LOADING = "SET_LOADING";
 export const SEARCH_TASK = "SEARCH_TASK";
 export const TASK_ERROR = "LOGS_ERROR";
-
+export const NEXT_PAGE = "NEXT_PAGE";
 export const DELETE_TASK = "DELETE_TASK";
 export const TECHS_ERROR = "TECHS_ERROR";
