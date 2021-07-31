@@ -1,4 +1,4 @@
-import ReactPaginate from "react-paginate";
+// import ReactPaginate from "react-paginate";
 import { connect } from "react-redux";
 import { paginationQuery } from "../actions";
 import styles from "./style.module.css";
@@ -12,7 +12,7 @@ const ContentHeader = (props) => {
         <span>Closed (0)</span>
       </div>
       <div className={styles.pagination_button}>
-        <ReactPaginate
+        {/* <ReactPaginate
           pageCount={props.pageCount}
           marginPagesDisplayed={props.marginPagesDisplayed}
           pageRangeDisplayed={props.pageRangeDisplayed}
@@ -20,8 +20,8 @@ const ContentHeader = (props) => {
           containerClassName={props.containerClassName}
           subContainerClassName={props.subContainerClassName}
           activeClassName={props.activeClassName}
-        />
-        {/* <span onClick={() => paginationQuery}>Next</span> | <span>Prev</span> */}
+        /> */}
+        <span onClick={() => paginationQuery}>Next</span> | <span>Prev</span>
       </div>
     </div>
   );

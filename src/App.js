@@ -38,7 +38,7 @@ const DrugStocLogger = ({ tasks, getProjects, loading }) => {
     getProjects();
     // getTaskPerPage();
     // eslint-disable-next-line
-  }, [offset]);
+  }, [tasks]);
 
   return (
     <div className="container-holder">
