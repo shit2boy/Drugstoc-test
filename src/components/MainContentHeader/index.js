@@ -12,15 +12,6 @@ const ContentHeader = (props) => {
         <span>Closed (0)</span>
       </div>
       <div className={styles.pagination_button}>
-        {/* <ReactPaginate
-          pageCount={props.pageCount}
-          marginPagesDisplayed={props.marginPagesDisplayed}
-          pageRangeDisplayed={props.pageRangeDisplayed}
-          onPageChange={props.onPageChange}
-          containerClassName={props.containerClassName}
-          subContainerClassName={props.subContainerClassName}
-          activeClassName={props.activeClassName}
-        /> */}
         <span onClick={() => paginationQuery}>Next</span> | <span>Prev</span>
       </div>
     </div>
