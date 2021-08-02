@@ -165,7 +165,7 @@ const AddTaskForm = ({
             }}
           >
             <FormInput
-              type="text"
+              type="number"
               label="Price"
               error={errors["taskPrice"]}
               value={task["taskPrice"]}
