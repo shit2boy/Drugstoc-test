@@ -18,11 +18,15 @@ const initState = {
 
   experts: [
     {
+      id: 1,
+      fullName: "Unassigned ",
+    },
+    {
       id: 2,
       fullName: "Sam Smith",
     },
     {
-      fullName: "Akeem shittu",
+      fullName: "Adamu Musa",
 
       id: 5,
     },
@@ -37,7 +41,7 @@ const initState = {
       id: 7,
     },
     {
-      fullName: "Akeem Trump",
+      fullName: "Funsho Trump",
 
       id: 8,
     },
@@ -48,7 +52,7 @@ const initState = {
 export default (state = initState, action) => {
   switch (action.type) {
     case GET_ALL_TASKS:
-      console.log(action.payload);
+      // console.log(action.payload);
       return {
         ...state,
         tasks: action.payload,
@@ -81,7 +85,7 @@ export default (state = initState, action) => {
         loading: false,
       };
     case CLEAR_CURRENT:
-      // console.log("cleared");
+      console.log("cleared");
       return {
         ...state,
         current: null,

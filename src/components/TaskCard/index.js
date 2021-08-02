@@ -54,7 +54,7 @@ const TaskCard = ({ tasksItem, deleteTask, setCurrent }) => {
         <p className={styles.subtitle}>Task price</p>
         <h6 className={styles.subtitle}>
           Delivery: <span className={styles.subtitle}></span> within{" "}
-          {tasksItem.delivryDate} days
+          {tasksItem.deliveryDate} days
         </h6>
       </div>
       <div className={styles.asignee_user}>

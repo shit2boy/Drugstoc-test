@@ -83,17 +83,17 @@ ul {
   align-items: center;
   /* text-align: center; */
 }
-
-/* grow card */
-.grow {
-  -moz-osx-font-smoothing: grayscale;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-  transition: transform 0.1s ease-out;
-}
-.grow:hover,
-.grow:focus {
-  transform: scale(1.05);
+.select {
+  width: 100%;
+  padding: 12px 5px;
+  margin: 8px 0;
+  font-style: 14px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: var(--text-body-color);
+  text-transform: capitalize;
+  box-sizing: border-box;
 }
 
 /* Cards */

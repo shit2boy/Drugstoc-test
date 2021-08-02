@@ -13,8 +13,8 @@ import {
 
 import firebaseConfig from "../../config/fbconfig";
 
-const ref = firebaseConfig.firestore().collection("projects");
-// const ref = firebaseConfig.firestore().collection("taskProjects");
+// const ref = firebaseConfig.firestore().collection("projects");
+const ref = firebaseConfig.firestore().collection("taskProjects");
 export const getProjects = (sort) => async (dispatch) => {
   const sortPattern = sort || "asc";
 

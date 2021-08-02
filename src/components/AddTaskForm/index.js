@@ -21,12 +21,10 @@ const AddTaskForm = ({
   const [errors, setErrors] = useState({});
 
   const [task, setTask] = useState({});
-  const [editTask, setEditTask] = useState(false);
   const [message, setMessage] = useState(null);
   useEffect(() => {
     if (current) {
       setTask(current);
-      setEditTask(true);
     }
   }, [current]);
 
@@ -35,7 +33,7 @@ const AddTaskForm = ({
       setTask({
         ...task,
         id: uuidv4(),
-        delivryDate: "5",
+        // delivryDate: "5",
         createdDate: new Date(),
         [e.target.name]: e.target.value,
       });
@@ -58,6 +56,10 @@ const AddTaskForm = ({
     if (!task.taskPrice) {
       formIsValid = false;
       errors["taskPrice"] = "*Please input price";
+    }
+    if (!task.deliveryDate) {
+      formIsValid = false;
+      errors["deliveryDate"] = "*Please input deadline for task";
     }
     if (!task.description) {
       formIsValid = false;
@@ -96,18 +98,18 @@ const AddTaskForm = ({
         description: "",
         taskLabel: "",
         taskPrice: "",
+        deliveryDate: "",
         taskStatus: "",
         comments: "",
         expert: " ",
       });
-      if (editTask) {
+      if (current !== null) {
         updateTask(task, setMessage);
         clearCurrent();
-        setEditTask(false);
-        // console.log(current);
-        // console.log(task);
+        await clearCurrent();
       } else {
         addNewTask(task);
+        await clearCurrent();
       }
     }
   };
@@ -141,7 +143,7 @@ const AddTaskForm = ({
               {errors["taskLabel"]}
             </span>
             <select
-              className={styles.select}
+              className="select"
               name="taskLabel"
               value={task["taskLabel"]}
               onChange={handleChange}
@@ -155,17 +157,36 @@ const AddTaskForm = ({
               <option value="Testing">Testing</option>
             </select>
           </div>
+          <div
+            style={{
+              display: "flex",
+              // justifyContent: "space-between",
+              // width: "100%",
+            }}
+          >
+            <FormInput
+              type="text"
+              label="Price"
+              error={errors["taskPrice"]}
+              value={task["taskPrice"]}
+              onChange={handleChange}
+              name="taskPrice"
+              placeholder="Task price"
+              required
+              style={{ width: "95%" }}
+            />
+            <FormInput
+              type="number"
+              label="Duration"
+              error={errors["deliveryDate"]}
+              value={task["deliveryDate"]}
+              onChange={handleChange}
+              name="deliveryDate"
+              placeholder="Number of days to Deliver task"
+              required
+            />
+          </div>
 
-          <FormInput
-            type="text"
-            label="Price"
-            error={errors["taskPrice"]}
-            value={task["taskPrice"]}
-            onChange={handleChange}
-            name="taskPrice"
-            placeholder="Task price"
-            required
-          />
           <div>
             <label>Assign Task</label>
             <span
@@ -174,7 +195,7 @@ const AddTaskForm = ({
               {errors["expert"]}
             </span>
             <select
-              className={styles.select}
+              className="select"
               name="expert"
               value={task["expert"]}
               onChange={handleChange}
@@ -194,7 +215,7 @@ const AddTaskForm = ({
             >
               {errors["taskStatus"]}
             </span>
-            <label>
+            <label className={styles.label}>
               In Progress
               <input
                 type="radio"
@@ -204,7 +225,7 @@ const AddTaskForm = ({
                 className={styles.checkbox}
               />
             </label>
-            <label>
+            <label className={styles.label}>
               In Review
               <input
                 type="radio"
@@ -214,7 +235,7 @@ const AddTaskForm = ({
                 className={styles.checkbox}
               />
             </label>
-            <label>
+            <label className={styles.label}>
               Verify
               <input
                 type="radio"
@@ -224,7 +245,7 @@ const AddTaskForm = ({
                 className={styles.checkbox}
               />
             </label>
-            <label>
+            <label className={styles.label}>
               Waiting Approval
               <input
                 type="radio"
